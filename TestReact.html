@@ -7,6 +7,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
 <body>
@@ -14,23 +15,75 @@
 
 
 	<script type="text/babel">
-		var HelloWorld = React.createClass({
+
+		var CONTACTS = [
+            {
+                id: 1,
+                name: 'Darth Vader',
+                phone: '+250966666666',
+                image: 'https://media1.tenor.com/images/fb602ebdde0b89aaacacdad766c7eaab/tenor.gif?itemid=5700434'
+            }, {
+                id: 2,
+                name: 'Princess Leia',
+                phone: '+250966344466',
+                image: 'https://media.giphy.com/media/10gu1zZ66FAQak/giphy.gif'
+            }, {
+                id: 3,
+                name: 'Luke Skywalker',
+                phone: '+250976654433',
+                image: 'https://media1.tenor.com/images/1ba5cd9d92d53eea2466e83ce5f3fbf9/tenor.gif?itemid=4957218'
+            }, {
+                id: 4,
+                name: 'Chewbacca',
+                phone: '+250456784935',
+                image: 'https://media.giphy.com/media/dfzyBlzJH9Q0E/source.gif'
+            }
+        ];
+
+		var Contact = React.createClass({
+			render: function(){
+				return (
+					<li className = "contact">
+						<img className = "contact-image" src = {this.props.img} width = "50px" height = "50px"/>
+						
+						<div className = "contact-info">
+							<div className = "contact-name" >{this.props.name}</div>
+							<div className = "contact-number" >{this.props.phone}</div>
+						</div>
+
+					</li>
+				);
+			}
+		});
+
+		var ContactsList = React.createClass({
 			render: function() {
-				return <h1> Hi, {this.props.name} </h1>
+				return(
+					<div>
+						<ul>
+							{
+								CONTACTS.map(function(el) {
+									return <Contact 
+										key = {el.id} 
+										name = {el.name} 
+										phone = {el.phone}  
+										img = {el.image}
+									/>;
+								})
+							}
+						</ul>
+					</div>
+				);
 			}
 		});
 
 		ReactDOM.render(
 			<div>
-				<HelloWorld name = "One"/>
-				<HelloWorld/>
-				<HelloWorld/>
+				<ContactsList/>
 			</div>,
 			document.getElementById("content")
 		);
 	</script>
-	
-
 
 </body>
 </html>
